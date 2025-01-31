@@ -1,47 +1,49 @@
 /*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+! "Hybrid" Styles: Tailwind-like Reset + Fluent UI Integration
+   preserving the original color variables, fonts, and core layout.
+   Adjust or prune as needed.
 */
 
 /* ========================= */
 /* 1) ADD YOUR COLOR VARIABLES HERE */
 :root {
   /* Background gradient colors */
-  --bg-gradient-from: #513742;    /* used in .from-gray-700 */
-  --bg-gradient-to:   #120312;    /* used in .to-gray-950   */
+  --bg-gradient-from: #513742;    /* used for the page background "from-gray-700" */
+  --bg-gradient-to:   #120312;    /* used for the page background "to-gray-950"   */
 
   /* Button background colors */
-  --btn-bg-primary: #f63b7e;                     /* used in .bg-blue-500 */
-  --btn-bg-secondary: rgb(86, 75, 99);           /* used in .bg-gray-600 */
+  --btn-bg-primary: #f63b7e;        /* replaced .bg-blue-500 */
+  --btn-bg-secondary: rgb(86, 75, 99); /* replaced .bg-gray-600 */
 
-  /* Grid background color */
-  --grid-bg-color: rgb(68, 55, 81);             /* used in .bg-gray-700 */
-  
-  /* Hover states */
-  --hover-bg-primary: 245 122 165;  /* used in .hover\:bg-blue-400 (rgb values) */
-  --hover-bg-secondary1: 115 101 130; /* used in .hover\:bg-gray-500 */
-  --hover-bg-secondary2: 115 101 130;    /* used in .hover\:bg-gray-600 */
+  /* Grid/background color */
+  --grid-bg-color: rgb(68, 55, 81); /* replaced .bg-gray-700 */
+
+  /* Hover states (useful for .hover styles) */
+  --hover-bg-primary: 245 122 165;    /* replaced .hover:bg-blue-400 (rgb values) */
+  --hover-bg-secondary1: 115 101 130; /* replaced .hover:bg-gray-500 */
+  --hover-bg-secondary2: 115 101 130; /* replaced .hover:bg-gray-600 */
+
+  /* Text color / Foreground for main content */
+  --main-text-color: rgb(229 231 235); /* akin to .text-gray-200 */
+  --sub-text-color: rgb(156 163 175);  /* akin to .text-gray-400 */
 }
+
 /* ========================= */
 
-
-
-
 /*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+================================================================================
+ RESET / BASE RULES (from Tailwind’s Preflight)
+================================================================================
 */
 
+/* 1. Prevent padding & border from affecting width. 2. Default border style/color. */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
-  /* 1 */
   border-width: 0;
-  /* 2 */
   border-style: solid;
-  /* 2 */
   border-color: #e5e7eb;
-  /* 2 */
 }
 
 ::before,
@@ -49,415 +51,191 @@
   --tw-content: '';
 }
 
-/*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
-6. Use the user's configured `sans` font-variation-settings by default.
+/* 1. Set a sensible line-height. 
+   2. Prevent iOS text-size adjust after orientation changes.
+   3. Use tab-size=4
+   4. Use system/UI fonts by default. 
+   5. Normal feature settings.
+   6. Normal variation settings.
 */
-
 html {
   line-height: 1.5;
-  /* 1 */
   -webkit-text-size-adjust: 100%;
-  /* 2 */
   -moz-tab-size: 4;
-  /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
-  /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
+      tab-size: 4;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-feature-settings: normal;
-  /* 5 */
   font-variation-settings: normal;
-  /* 6 */
 }
 
-/*
-1. Remove the margin in all browsers.
-2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+/* 1. Remove the margin in all browsers.
+   2. Inherit line-height from html.
 */
-
 body {
   margin: 0;
-  /* 1 */
   line-height: inherit;
-  /* 2 */
+
+  /* (OPTIONAL) set up the background gradient on <body>, 
+     preserving the "fixed" gradient from the original. */
+  background: linear-gradient(to top, var(--bg-gradient-from), var(--bg-gradient-to)) fixed;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* text color close to "text-gray-200" from original */
+  color: var(--main-text-color);
+
+  /* We can keep or override with your custom font families below */
+  font-family: "PTSans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* If you want a "full viewport" width, as original: */
+  width: 100%;
+  min-height: 100vh;
 }
 
-/*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
-*/
-
+/* Basic resets for block elements, etc. */
 hr {
   height: 0;
-  /* 1 */
   color: inherit;
-  /* 2 */
   border-top-width: 1px;
-  /* 3 */
 }
-
-/*
-Add the correct text decoration in Chrome, Edge, and Safari.
-*/
-
-abbr:where([title]) {
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+abbr[title] {
+  text-decoration: underline dotted;
 }
-
-/*
-Remove the default font size and weight for headings.
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
   font-weight: inherit;
 }
-
-/*
-Reset links to optimize for opt-in styling instead of opt-out.
-*/
-
 a {
   color: inherit;
   text-decoration: inherit;
 }
-
-/*
-Add the correct font weight in Edge and Safari.
-*/
-
-b,
-strong {
+b, strong {
   font-weight: bolder;
 }
-
-/*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
-*/
-
-code,
-kbd,
-samp,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* 1 */
+code, kbd, samp, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace;
   font-size: 1em;
-  /* 2 */
 }
-
-/*
-Add the correct font size in all browsers.
-*/
-
 small {
   font-size: 80%;
 }
-
-/*
-Prevent `sub` and `sup` elements from affecting the line height in all browsers.
-*/
-
-sub,
-sup {
+sub, sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
-
 sub {
   bottom: -0.25em;
 }
-
 sup {
   top: -0.5em;
 }
-
-/*
-1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
-2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
-3. Remove gaps between table borders by default.
-*/
-
 table {
   text-indent: 0;
-  /* 1 */
   border-color: inherit;
-  /* 2 */
   border-collapse: collapse;
-  /* 3 */
 }
-
-/*
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-3. Remove default padding in all browsers.
-*/
-
-button,
-input,
-optgroup,
-select,
-textarea {
+button, input, optgroup, select, textarea {
   font-family: inherit;
-  /* 1 */
   font-feature-settings: inherit;
-  /* 1 */
   font-variation-settings: inherit;
-  /* 1 */
   font-size: 100%;
-  /* 1 */
   font-weight: inherit;
-  /* 1 */
   line-height: inherit;
-  /* 1 */
   color: inherit;
-  /* 1 */
   margin: 0;
-  /* 2 */
   padding: 0;
-  /* 3 */
 }
-
-/*
-Remove the inheritance of text transform in Edge and Firefox.
-*/
-
-button,
-select {
+button, select {
   text-transform: none;
 }
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
-*/
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+button, [type='button'], [type='reset'], [type='submit'] {
   -webkit-appearance: button;
-  /* 1 */
   background-color: transparent;
-  /* 2 */
   background-image: none;
-  /* 2 */
 }
-
-/*
-Use the modern Firefox focus style for all focusable elements.
-*/
-
 :-moz-focusring {
   outline: auto;
 }
-
-/*
-Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
-*/
-
 :-moz-ui-invalid {
   box-shadow: none;
 }
-
-/*
-Add the correct vertical alignment in Chrome and Firefox.
-*/
-
 progress {
   vertical-align: baseline;
 }
-
-/*
-Correct the cursor style of increment and decrement buttons in Safari.
-*/
-
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
   height: auto;
 }
-
-/*
-1. Correct the odd appearance in Chrome and Safari.
-2. Correct the outline style in Safari.
-*/
-
 [type='search'] {
   -webkit-appearance: textfield;
-  /* 1 */
   outline-offset: -2px;
-  /* 2 */
 }
-
-/*
-Remove the inner padding in Chrome and Safari on macOS.
-*/
-
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to `inherit` in Safari.
-*/
-
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
-  /* 1 */
   font: inherit;
-  /* 2 */
 }
-
-/*
-Add the correct display in Chrome and Safari.
-*/
-
 summary {
   display: list-item;
 }
-
-/*
-Removes the default spacing and border for appropriate elements.
-*/
-
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
   margin: 0;
 }
-
 fieldset {
   margin: 0;
   padding: 0;
 }
-
 legend {
   padding: 0;
 }
-
-ol,
-ul,
-menu {
+ol, ul, menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-/*
-Reset default styling for dialogs.
-*/
-
 dialog {
   padding: 0;
 }
-
-/*
-Prevent resizing textareas horizontally by default.
-*/
-
 textarea {
   resize: vertical;
 }
-
-/*
-1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
-2. Set the default placeholder color to the user's configured gray 400 color.
-*/
-
+/* Placeholder styling */
 input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1;
-  /* 1 */
   color: #9ca3af;
-  /* 2 */
 }
-
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   opacity: 1;
-  /* 1 */
   color: #9ca3af;
-  /* 2 */
 }
-
-/*
-Set the default cursor for buttons.
-*/
-
-button,
-[role="button"] {
+button, [role="button"] {
   cursor: pointer;
 }
-
-/*
-Make sure disabled buttons don't get the pointer cursor.
-*/
-
 :disabled {
   cursor: default;
 }
-
-/*
-1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
-2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
-   This can trigger a poorly considered lint error in some tools but is included by design.
-*/
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
+img, svg, video, canvas, audio, iframe, embed, object {
   display: block;
-  /* 1 */
   vertical-align: middle;
-  /* 2 */
 }
-
-/*
-Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
-*/
-
-img,
-video {
+img, video {
   max-width: 100%;
   height: auto;
 }
-
-/* Make elements with the HTML hidden attribute stay hidden by default */
-
 [hidden] {
   display: none;
 }
 
+/* Tailwind/CSS variable placeholders for transforms, transitions, etc. */
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -468,19 +246,19 @@ video {
   --tw-skew-y: 0;
   --tw-scale-x: 1;
   --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
   --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
   --tw-ring-color: rgb(59 130 246 / 0.5);
@@ -488,26 +266,25 @@ video {
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
 }
-
 ::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -558,398 +335,186 @@ video {
   --tw-backdrop-sepia: ;
 }
 
-.package-version {
-  margin-left: 0.25rem;
-  margin-bottom: 0.25rem;
-  align-self: flex-end;
-}
-
-.package-links a:hover {
-  --tw-text-opacity: 1;
-  color: rgb(119 143 211 / var(--tw-text-opacity));
-  text-decoration-line: underline;
-}
-
-.disabled {
-  opacity: 0.5;
-}
-
-.m-1 {
-  margin: 0.25rem;
-}
-
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.my-1 {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.me-2 {
-  -webkit-margin-end: 0.5rem;
-          margin-inline-end: 0.5rem;
-}
-
-.ml-0 {
-  margin-left: 0px;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
-.block {
-  display: block;
-}
-
-.flex {
-  display: flex;
-}
-
-.inline-flex {
-  display: inline-flex;
-}
-
-.grid {
-  display: grid;
-}
-
-.hidden {
-  display: none;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-7 {
-  height: 1.75rem;
-}
-
-.h-8 {
-  height: 2rem;
-}
-
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
-.w-7 {
-  width: 1.75rem;
-}
-
-.max-w-5xl {
-  max-width: 64rem;
-}
-
-.max-w-max {
-  max-width: -moz-max-content;
-  max-width: max-content;
-}
-
-.flex-grow {
-  flex-grow: 1;
-}
-
-.grid-cols-\[3fr_0\.4fr\] {
-  grid-template-columns: 3fr 0.4fr;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.border-b-2 {
-  border-bottom-width: 2px;
-}
-
-.border-gray-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(93 75 99);
-}
-
-/* 2) USE THE COLOR VARIABLES INSTEAD OF HARD-CODED VALUES */
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: var(--btn-bg-primary);
-}
-
-.bg-gray-600 {
-  --tw-bg-opacity: 1;
-  background-color: var(--btn-bg-secondary);
-}
-
-.bg-gray-700 {
-  --tw-bg-opacity: 1;
-  background-color: var(--grid-bg-color);
-}
-
-.bg-gradient-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-
-.from-gray-700 {
-  --tw-gradient-from: var(--bg-gradient-from) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(55 65 81 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-gray-950 {
-  --tw-gradient-to: var(--bg-gradient-to) var(--tw-gradient-to-position);
-}
-
-.bg-fixed {
-  background-attachment: fixed;
-}
-
-.p-2 {
-  padding: 0.5rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.text-blue-400 {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
-}
-
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-
-.text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
-.outline-none {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.outline {
-  outline-style: solid;
-}
-
-.outline-0 {
-  outline-width: 0px;
-}
-
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.duration-75 {
-  transition-duration: 75ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-button {
-  outline: 0px solid transparent;
-}
-
-button:focus-visible {
-  outline-style: solid;
-  outline-width: 2px;
-  outline-color: #f57aa5;
-}
-
+/*
+================================================================================
+ FONTS
+================================================================================
+*/
 @font-face {
   font-family: "Novecento";
   src: url("/fonts/NovecentoNarrowUltBold.otf") format("opentype");
 }
-
 @font-face {
   font-family: "PTSans";
   src: url("/fonts/PTSansRegular.ttf") format("truetype"),
        url("/fonts/PTSansBold.ttf") format("truetype");
 }
 
-body {
-  width: 98vw;
-}
+/*
+================================================================================
+ UTILITY & CUSTOM CLASSES (adapted to new markup)
+================================================================================
+*/
 
-.package-version {
+/* Match original style for small text or "version" disclaimers, etc. */
+.package-version, .package-links, .caption1 {
   font-size: 0.8rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.4);
 }
 
-.package-links {
-  font-size: 0.8rem;
-  font-weight: 400;
+/* Example smaller text variant if needed */
+.caption2 {
+  font-size: 0.75rem;
+  font-weight: 300;
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* Hover classes use the new variables (with alpha from Tailwind) */
-.hover\:bg-blue-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--hover-bg-primary) / var(--tw-bg-opacity));
+/* If you still want the "Novecento" headings */
+h1, .font-novecento {
+  font-family: "Novecento", sans-serif;
 }
 
-.hover\:bg-gray-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--hover-bg-secondary1) / var(--tw-bg-opacity));
+/* Container styling for your main content, 
+   similar to the old .max-w-5xl, .mx-auto, .my-10, .px-5
+*/
+.content {
+  max-width: 64rem; /* 64rem ~ tailwind's max-w-5xl */
+  margin: 2.5rem auto; /* ~ my-10 */
+  padding: 0 1.25rem;  /* ~ px-5 */
+  overflow: hidden;
 }
 
-.hover\:bg-gray-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--hover-bg-secondary2) / var(--tw-bg-opacity));
+/* Basic "row" and "col" flex classes (similar to bootstrap’s default usage). */
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
 }
 
-.hover\:text-blue-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
+/* Align-items helpers */
+.align-items-center {
+  align-items: center;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.justify-content-end {
+  justify-content: flex-end;
+}
+.justify-content-center {
+  justify-content: center;
 }
 
-.hover\:underline:hover {
-  text-decoration-line: underline;
+/* "width: 100%" helper */
+.w-100 {
+  width: 100%;
 }
 
-.focus\:outline-2:focus {
-  outline-width: 2px;
+/* Margins, spacing: (matching tailwind scale as best as possible) */
+.m-0 { margin: 0 !important; }
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-4 { margin-bottom: 1rem !important; }
+.mt-4 { margin-top: 1rem !important; }
+.ms-2 { margin-inline-start: 0.5rem !important; }
+
+/* If you want a slight top/bottom or any other spacing, replicate more if needed */
+
+/* Replicates "body > div" banner for top image if needed. */
+.bannerImage {
+  width: 100%;
+  height: 200px; /* adjust as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 1rem;
 }
 
-.focus\:outline-blue-400:focus {
-  outline-color: rgb(245, 122, 165);
+/*
+================================================================================
+ BUTTON & HOVER STATES
+================================================================================
+*/
+
+/* Fluent Buttons by default get styled by the web component. 
+   If you want to override accent appearance to match your pink button, do: */
+fluent-button[appearance="accent"] {
+  background-color: var(--btn-bg-primary);
+  color: #fff;
+  border-radius: 0.5rem; /* ~ rounded-lg */
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* optional padding/height, etc: */
+  height: 2rem;
+  font-size: 0.875rem; /* ~ text-sm */
+  border: none;
 }
 
-@media (min-width: 640px) {
-  .sm\:ml-1 {
-    margin-left: 0.25rem;
-  }
+/* On hover for accent buttons */
+fluent-button[appearance="accent"]:hover {
+  background-color: rgb(var(--hover-bg-primary));
+}
 
-  .sm\:flex-grow-0 {
-    flex-grow: 0;
-  }
+/* "stealth" or default appearance if you want the secondary button color. */
+fluent-button:not([appearance="accent"]) {
+  background-color: var(--btn-bg-secondary);
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  height: 2rem;
+  font-size: 0.875rem;
+  border: none;
+}
 
-  .sm\:grid-cols-\[3fr_0\.5fr_2fr\] {
-    grid-template-columns: 3fr 0.5fr 2fr;
-  }
+/* On hover for secondary/stealth buttons: */
+fluent-button:not([appearance="accent"]):hover {
+  background-color: rgb(var(--hover-bg-secondary1));
+}
 
-  .sm\:flex-row {
-    flex-direction: row;
-  }
+/* If you want a "focus-visible" outline color. */
+fluent-button:focus-visible {
+  outline: 2px solid rgb(var(--hover-bg-primary));
+  outline-offset: 2px;
+}
 
-  .sm\:justify-center {
-    justify-content: center;
-  }
+/* Similar states for <a> or any clickable link. */
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/*
+================================================================================
+ DATA GRID & CARD (fluent-data-grid, fluent-card) Theming
+================================================================================
+*/
+
+/* Card background, if you want it close to .bg-gray-700 from original: */
+fluent-card.packages {
+  background-color: var(--grid-bg-color);
+  border-radius: 0.5rem; /* ~ rounded-lg */
+  padding: 1rem;
+  color: var(--main-text-color);
+}
+
+/* Example for the data grid's row styling, if you want lines or spacing: */
+fluent-data-grid {
+  --background-color: transparent;  /* Let the card's background show */
+  --border-color: rgb(93, 75, 99);  /* akin to border-gray-600 */
+}
+
+fluent-data-grid-row[row-type="header"] {
+  font-weight: bold;
+  border-bottom: 2px solid rgb(93, 75, 99);
+}
+
+/* Example for the cells—darker alternate row, etc. 
+   (You can do row-index-based styling or rely on custom CSS props) */
+fluent-data-grid-row {
+  --background-color: transparent;
+}
+fluent-data-grid-cell {
+  padding: 0.5rem;
 }
