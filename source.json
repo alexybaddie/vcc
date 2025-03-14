@@ -1,7 +1,7 @@
 {
     "name":"Lexi's Listings",
     "id":"com.lexibaddie.vcc",
-    "url":"https://alexybaddie.github.io/vcc2/index.json",
+    "url":"https://alexybaddie.github.io/vcc/index.json",
     "author":{
         "email":"developer@vrchat.com",
         "name":"lexibaddie",
@@ -9,7 +9,7 @@
     },
     "description":"For use with VRChat Creator Companion",
     "infoLink":{
-        "url":"http://github.com/alexybaddie/vcc2",
+        "url":"http://github.com/alexybaddie/vcc",
         "text":"View on GitHub"
     },
     "bannerUrl":"banner.png",
